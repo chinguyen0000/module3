@@ -71,7 +71,7 @@ select * from class where month(StartDate) = 12;
 
 select * from subject where Credit between 3 and 5;
 
-update student set ClassID = 2 where StudentName = "Hung" and StudentID = 1;
+update student set ClassID = 10 where StudentName = "Hung" and StudentID = 1;
 select * from student;
 
 select StudentName, SubName, Mark from ((subject inner join mark on subject.SubID = mark.SubID) inner join student on mark.StudentID = student.StudentID) order by Mark desc, StudentName asc;
