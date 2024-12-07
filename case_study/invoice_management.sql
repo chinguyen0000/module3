@@ -58,4 +58,13 @@ insert into Customer(FullName, PhoneNumber, Email) values ('Trần Văn Bền','
 insert into Customer(FullName, PhoneNumber, Email) values ('Nguyễn Tường An','0123456789','antuong00@gmail.com');
 insert into Customer(FullName, PhoneNumber, Email) values ('Bùi Thị Mỹ','0909090988','mymybui@gmail.com');
 
+/*Thêm dữ liệu bảng Invoice*/
+insert into Invoice(CustomerID, Date, TotalAmount) values (1,'2024-12-01 10:30:00',33990000),
+(2,'2024-12-02 15:45:00',19380000),
+(3,'2024-12-03 09:20:00',6380000);
 
+/*Thêm dữ liệu bảng InvoiceDetail*/
+insert into InvoiceDetail(InvoiceID, ProductID, Quantity, Subtotal) values (1,1,1,33990000.00),
+(2,6,1,16990000.00),
+(2,7,1,2390000.00),
+(3,4,2,6380000);

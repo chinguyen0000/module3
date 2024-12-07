@@ -1,5 +1,8 @@
 package com.example.mobile_invoice_management.model;
 
+import com.example.mobile_invoice_management.service.IInvoiceService;
+import com.example.mobile_invoice_management.service.InvoiceService;
+
 import java.time.LocalDateTime;
 
 public class Invoice {
@@ -51,5 +54,10 @@ public class Invoice {
 
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public Customer getCustomerByID(int customerID) {
+        IInvoiceService service = new InvoiceService();
+        return service.returnCustomerByID(customerID);
     }
 }
