@@ -1,5 +1,6 @@
 package com.example.mobile_invoice_management.repository;
 
+import com.example.mobile_invoice_management.model.Customer;
 import com.example.mobile_invoice_management.model.Invoice;
 import com.example.mobile_invoice_management.model.InvoiceDetail;
 import com.example.mobile_invoice_management.model.Product;
@@ -14,6 +15,9 @@ public class InvoiceRepository implements IInvoiceRepository {
     private final String SHOW_ALL_PRODUCTS = "select * from product";
     private final String SHOW_ALL_INVOICES = "select * from invoice";
     private final String SHOW_INVOICE_DETAIL = "select * from invoicedetail where InvoiceID = ?";
+    private final String SHOW_ALL_CUSTOMERS = "select * from customer";
+    private final String SHOW_CUSTOMER_ID_BY_FULLNAME = "select CustomerID from customer where FullName like '% ?' or FullName = ? limit 1";
+
 
     @Override
     public List<Product> toProductList() {
@@ -59,6 +63,27 @@ public class InvoiceRepository implements IInvoiceRepository {
     }
 
     @Override
+    public List<Customer> toCustomerList() {
+        BaseRepository base = new BaseRepository();
+        Connection connection = base.getConnection();
+        List<Customer> customers = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SHOW_ALL_CUSTOMERS);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("CustomerID");
+                String name = resultSet.getString("FullName");
+                String phone = resultSet.getString("PhoneNumber");
+                String email = resultSet.getString("Email");
+                customers.add(new Customer(id, name, phone, email));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return customers;
+    }
+
+    @Override
     public List<InvoiceDetail> toInvoiceDetailList(int id) {
         BaseRepository base = new BaseRepository();
         Connection connection = base.getConnection();
@@ -79,6 +104,25 @@ public class InvoiceRepository implements IInvoiceRepository {
             throw new RuntimeException(e);
         }
         return invoiceDetails;
+    }
+
+    @Override
+    public int toCustomerIDByFullName(String fullName) {
+        BaseRepository base = new BaseRepository();
+        Connection connection = base.getConnection();
+        int customerID = -1;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SHOW_CUSTOMER_ID_BY_FULLNAME);
+            preparedStatement.setString(1, fullName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                customerID = resultSet.getInt("CustomerID");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return customerID;
     }
 
 }

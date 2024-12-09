@@ -17,23 +17,14 @@
     </style>
 </head>
 <body>
-
     <h1>ĐĂNG NHẬP </h1>
-    <form action="login_servlet" method="post" style="width: 40%; margin:auto;">
-
-        <label for="inputUserName" class="form-label">Tài Khoản</label>
-        <input type="text" id="inputUsername" class="form-control" name="username">
-
-        <label for="inputPassword" class="form-label">Mật Khẩu</label>
-        <input type="password" id="inputPassword" class="form-control" name="password" required>
-
-        <br>
-        <button class="btn btn-primary" type="submit">Đăng Nhập</button>
+    <form action="login_servlet" method="post">
+        <input type="text" name="username" placeholder="Tài khoản" required>
+        <input type="password" name="password" placeholder="Mật khẩu" required>
+        <button type="submit">Đăng nhập</button>
         <c:if test="${param.error == 'true'}">
-            <p style="color: red;" class="form-text">Sai tên đăng nhập hoặc mật khẩu!</p>
+            <p style="color: red;">Sai tên đăng nhập hoặc mật khẩu!</p>
         </c:if>
     </form>
-
-
 </body>
 </html>
