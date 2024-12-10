@@ -5,6 +5,7 @@ import com.example.mobile_invoice_management.repository.BaseRepository;
 import com.example.mobile_invoice_management.repository.IInvoiceRepository;
 import com.example.mobile_invoice_management.repository.InvoiceRepository;
 
+import javax.servlet.ServletException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -163,7 +164,11 @@ public class InvoiceService implements IInvoiceService {
             preparedStatement.executeUpdate();
             isInserted = true;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            if (e.getSQLState().equals("45000")) {
+                isInserted = false;
+            } else {
+                e.printStackTrace();
+            }
         }
         return isInserted;
     }
@@ -193,7 +198,7 @@ public class InvoiceService implements IInvoiceService {
     }
 
     @Override
-    public boolean updateInvoice(int invoiceID, int customerID, LocalDateTime dateTime, double totalAmount) {
+    public boolean updateInvoice(int invoiceID, int customerID, LocalDateTime dateTime, double totalAmount){
         BaseRepository repo = new BaseRepository();
         Connection connection = repo.getConnection();
         boolean isUpdated = false;

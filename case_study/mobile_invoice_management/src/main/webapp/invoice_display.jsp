@@ -31,6 +31,9 @@
         <li class="nav-item">
             <a class="nav-link" href="product_servlet">Điện Thoại</a>
         </li>
+        <li>
+            <a class="nav-link justify-content-end" href="logout">Đăng Xuất</a>
+        </li>
     </ul>
 
     <div class="container mt-4">

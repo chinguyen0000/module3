@@ -37,6 +37,9 @@
         <li class="nav-item">
             <a class="nav-link active" href="#">Điện Thoại</a>
         </li>
+        <li>
+            <a class="nav-link justify-content-end" href="logout">Đăng Xuất</a>
+        </li>
     </ul>
     <table class="table table-striped" >
         <thead>

@@ -159,6 +159,12 @@ public class InvoiceServlet extends HttpServlet {
                     if (isUpdated) {
                         resp.sendRedirect("/invoice_servlet");
                     }
+                } else {
+                    System.out.println("ngoại lệ ở servlet");
+                    out.println("<html><body>");
+                    out.println("<h1>Số lượng sản phẩm không đủ. Vui lòng thực hiện lại.</h1>");
+                    out.println("<a href='/invoice_servlet'>Chuyển đến trang chủ</a>");
+                    out.println("</body></html>");
                 }
             } else {
                 out.println("<html><body>");
